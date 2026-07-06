@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
+
   <style>
     body {
       margin: 0;
@@ -26,16 +27,40 @@
       transition: opacity 0.3s;
     }
 
-    
     .overlay:hover {
       opacity: 0;
     }
   </style>
 </head>
+
 <body>
+
   <div class="box">
     <img src="./after.png">
-    <img class="overlay" src="./before.png">
+
+    <img
+      id="overlay"
+      class="overlay"
+      src="./before.png"
+    >
   </div>
+
+  <audio
+    id="cameraSound"
+    src="./camera.mp3"
+    preload="auto">
+  </audio>
+
+
+  <script>
+    const overlay = document.getElementById("overlay");
+    const cameraSound = document.getElementById("cameraSound");
+
+    overlay.addEventListener("click", () => {
+      cameraSound.currentTime = 0;
+      cameraSound.play();
+    });
+  </script>
+
 </body>
 </html>
