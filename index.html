@@ -28,39 +28,23 @@
     <img id="photo" src="./before.png">
   </div>
 
-  <audio
-    id="cameraSound"
-    src="./camera.mp3"
-    preload="auto">
-  </audio>
-
+  <audio id="cameraSound" src="./camera.mp3" preload="auto"></audio>
 
   <script>
     const photo = document.getElementById("photo");
-    const cameraSound = document.getElementById("cameraSound");
+    const sound = document.getElementById("cameraSound");
 
-    let changed = false;
+    let isAfter = false;
 
-    photo.addEventListener("click", async () => {
+    photo.addEventListener("click", () => {
+      sound.currentTime = 0;
+      sound.play();
 
-      // 찰칵 소리
-      cameraSound.currentTime = 0;
+      isAfter = !isAfter;
 
-      try {
-        await cameraSound.play();
-      } catch (error) {
-        console.log("소리 재생 실패:", error);
-      }
-
-      // 사진 변경
-      if (!changed) {
-        photo.src = "./after.png";
-        changed = true;
-      } else {
-        photo.src = "./before.png";
-        changed = false;
-      }
-
+      photo.src = isAfter
+        ? "./after.png"
+        : "./before.png";
     });
   </script>
 
