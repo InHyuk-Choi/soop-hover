@@ -25,6 +25,7 @@
       left: 0;
       top: 0;
       transition: opacity 0.3s;
+      cursor: pointer;
     }
 
     .overlay:hover {
@@ -51,14 +52,18 @@
     preload="auto">
   </audio>
 
-
   <script>
     const overlay = document.getElementById("overlay");
     const cameraSound = document.getElementById("cameraSound");
 
-    overlay.addEventListener("click", () => {
-      cameraSound.currentTime = 0;
-      cameraSound.play();
+    overlay.addEventListener("click", async () => {
+      try {
+        cameraSound.currentTime = 0;
+        await cameraSound.play();
+        console.log("찰칵 소리 재생 성공");
+      } catch (error) {
+        console.log("소리 재생 실패:", error);
+      }
     });
   </script>
 
