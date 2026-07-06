@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    body {
+      margin: 0;
+      background: transparent;
+    }
+
+    .box {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .box img {
+      width: 100%;
+      display: block;
+    }
+
+    .overlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      transition: opacity 0.3s;
+    }
+
+    .overlay:hover {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <img src="./after.png">
+    <img class="overlay" src="./before.png">
+  </div>
+</body>
+</html>
