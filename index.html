@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
 
   <style>
     body {
@@ -10,26 +10,14 @@
     }
 
     .box {
-      position: relative;
       width: 100%;
       max-width: 800px;
     }
 
-    .box img {
+    #photo {
       width: 100%;
       display: block;
-    }
-
-    .overlay {
-      position: absolute;
-      left: 0;
-      top: 0;
-      transition: opacity 0.3s;
       cursor: pointer;
-    }
-
-    .overlay:hover {
-      opacity: 0;
     }
   </style>
 </head>
@@ -37,13 +25,7 @@
 <body>
 
   <div class="box">
-    <img src="./after.png">
-
-    <img
-      id="overlay"
-      class="overlay"
-      src="./before.png"
-    >
+    <img id="photo" src="./before.png">
   </div>
 
   <audio
@@ -52,18 +34,33 @@
     preload="auto">
   </audio>
 
+
   <script>
-    const overlay = document.getElementById("overlay");
+    const photo = document.getElementById("photo");
     const cameraSound = document.getElementById("cameraSound");
 
-    overlay.addEventListener("click", async () => {
+    let changed = false;
+
+    photo.addEventListener("click", async () => {
+
+      // 찰칵 소리
+      cameraSound.currentTime = 0;
+
       try {
-        cameraSound.currentTime = 0;
         await cameraSound.play();
-        console.log("찰칵 소리 재생 성공");
       } catch (error) {
         console.log("소리 재생 실패:", error);
       }
+
+      // 사진 변경
+      if (!changed) {
+        photo.src = "./after.png";
+        changed = true;
+      } else {
+        photo.src = "./before.png";
+        changed = false;
+      }
+
     });
   </script>
 
